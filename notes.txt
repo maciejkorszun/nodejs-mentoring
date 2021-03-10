@@ -1,1 +1,4 @@
 You have to be logged in on github to push to the repo (maciejkorszun account)
+
+[POST] is for creating new things
+[PUT] is for editing existing things
