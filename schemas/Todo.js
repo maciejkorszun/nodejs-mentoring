@@ -1,7 +1,7 @@
 const Joi = require("@hapi/joi");
 
 const TodoValidationSchema = Joi.object({
-	id: Joi.alternatives().try(Joi.array().items(Joi.number().integer()), Joi.string()),
+	id: Joi.alternatives().try(Joi.number().integer(), Joi.string()),
 	description: Joi.string().required(),
 	completed: Joi.boolean(),
 });
