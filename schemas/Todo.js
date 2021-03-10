@@ -1,7 +1,7 @@
 function Todo(id = null, description = null, completed = false) {
-    this.id = id;
-    this.description = description;
-    this.completed = completed;
+	this.id = id;
+	this.description = description;
+	this.completed = completed;
 }
 
 /*
