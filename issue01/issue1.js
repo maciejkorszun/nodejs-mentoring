@@ -1,7 +1,7 @@
 const PORT = 3000;
 const express = require("express");
 const app = express();
-const Todo = require("./../schemas/Todo");
+const {Todo, TodoValidationSchema} = require("./../schemas/Todo");
 const statusCodes = require("./../other/statusCodes");
 
 console.log("app listening on port " + PORT);
