@@ -9,7 +9,8 @@ console.log("app listening on port " + PORT);
 let currentTodos = [
 	new Todo(1, "Buy groceries"),
 	new Todo(2, "Dispose of garbage", true),
-	new Todo(Math.floor((Math.random() * 10) + 2), "Wash the floors", false)
+	new Todo(Math.floor((Math.random() * 10) + 2), "Wash the floors", false),
+	new Todo(null, 12345, 12345)
 ];
 
 
