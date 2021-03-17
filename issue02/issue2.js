@@ -39,14 +39,14 @@ app.get("/api/todos/:id", function (req, res) { //localhost:3000/api/todos/1
 });
 
 app.post("/api/todos", validator.body(TodoValidationSchema), (req, res) => { //create new user
-	const b = req.body;
-	const p = req.params;
+	// const b = req.body;
+	// const p = req.params;
+	const q = req.query; //query?
 
-	console.log(b);
-	console.log(p);
-	// let newTodo = new Todo(b.description, b.completed);
+	let newTodo = new Todo(getNewId(), q.description, q.completed);
+	currentTodos.push(newTodo);
 
-	res.status(statusCodes["CREATED"]).json(null);
+	res.status(statusCodes["CREATED"]).json(newTodo);
 });
 
 app.listen(PORT);
