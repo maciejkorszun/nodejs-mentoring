@@ -1,6 +1,8 @@
 const express = require("express");
 const {Todo, TodoValidationSchema} = require("../schemas/Todo");
 const statusCodes = require("../other/statusCodes");
+const expressJoiValidation = require("express-joi-validation");
+const validator = expressJoiValidation.createValidator({});
 
 const app = express();
 const PORT = 3000;
@@ -36,19 +38,15 @@ app.get("/api/todos/:id", function (req, res) { //localhost:3000/api/todos/1
 		res.status(statusCodes["NOT_FOUND"]).json("Todo with id " + req.params.id + " not found");
 });
 
-// app.post("/api/", validator.body(validationSchema), (req, res) => { //edit (update) user
-// 	const b = req.body;
-// 	const existingUser = getNondeletedUsers().find(oneUser => oneUser.id == b.id);
-// 	if (!existingUser) {
-// 		res.status(statusCodes["NOT_FOUND"]).json("User with id " + b.id + " does not exist.");
-// 		return;
-// 	}
+app.post("/api/todos", validator.body(TodoValidationSchema), (req, res) => { //create new user
+	const b = req.body;
+	const p = req.params;
 
-// 	b.login ? existingUser.login = b.login : null;
-// 	b.password ? existingUser.password = b.password : null;
-// 	b.age ? existingUser.age = b.age : null;
+	console.log(b);
+	console.log(p);
+	// let newTodo = new Todo(b.description, b.completed);
 
-// 	res.json(existingUser);
-// });
+	res.status(statusCodes["CREATED"]).json(null);
+});
 
 app.listen(PORT);
