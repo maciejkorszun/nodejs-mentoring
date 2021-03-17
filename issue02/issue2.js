@@ -7,6 +7,10 @@ const validator = expressJoiValidation.createValidator({});
 const app = express();
 const PORT = 3000;
 
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: false })); // parse application/json
+app.use(express.json());
+
 console.log("app listening on port " + PORT);
 
 function countId() {
@@ -39,18 +43,23 @@ app.get("/api/todos/:id", function (req, res) { //localhost:3000/api/todos/1
 });
 
 app.post("/api/todos", validator.body(TodoValidationSchema), (req, res) => { //create new user
-	// const b = req.body;
+	const b = req.body;
 	// const p = req.params;
-	const q = req.query; //query?
+	// const q = req.query; //query?
+  
+	console.log(b);
 
-	console.log(q)
+	// if (!q.decription) {
+	// 	console.log("No description paramter");
+	// 	res.status(statusCodes["BAD_REQUEST"]).json("No description parameter found");
+	// 	return;
+	// }
 
-	if (!q.decription) {
-		console.log("No description paramter");
-		res.status(statusCodes["BAD_REQUEST"]).json("No description parameter found");
-		return;
-	}
-	let newTodo = new Todo(getNewId(), q.description, q.completed);
+	//right now this error is automated
+	//up to me 
+	// check error handling and show more appropiate error
+
+	let newTodo = new Todo(getNewId(), b.description, b.completed);
 	currentTodos.push(newTodo);
 
 	res.status(statusCodes["CREATED"]).json(newTodo);
