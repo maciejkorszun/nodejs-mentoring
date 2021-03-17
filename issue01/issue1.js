@@ -5,6 +5,8 @@ const statusCodes = require("./../other/statusCodes");
 const app = express();
 const PORT = 3000;
 
+TodoValidationSchema; //not needed
+
 console.log("app listening on port " + PORT);
 
 let currentTodos = [
