@@ -43,6 +43,13 @@ app.post("/api/todos", validator.body(TodoValidationSchema), (req, res) => { //c
 	// const p = req.params;
 	const q = req.query; //query?
 
+	console.log(q)
+
+	if (!q.decription) {
+		console.log("No description paramter");
+		res.status(statusCodes["BAD_REQUEST"]).json("No description parameter found");
+		return;
+	}
 	let newTodo = new Todo(getNewId(), q.description, q.completed);
 	currentTodos.push(newTodo);
 
