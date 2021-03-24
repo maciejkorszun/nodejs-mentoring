@@ -1,5 +1,5 @@
 const express = require("express");
-const { Todo, TodoValidationSchema } = require("../schemas/Todo");
+const { Todo, createTodoValidationSchema, modifyTodoValidationSchema } = require("../schemas/Todo");
 const statusCodes = require("../other/statusCodes");
 const expressJoiValidation = require("express-joi-validation");
 const validator = expressJoiValidation.createValidator({});
@@ -36,7 +36,7 @@ app.get("/api/todos/:id", function (req, res) { //localhost:3000/api/todos/1
 		res.status(statusCodes["NOT_FOUND"]).json("Todo with id " + req.params.id + " not found");
 });
 
-app.post("/api/todos", validator.body(TodoValidationSchema), (req, res) => { //create new Todo
+app.post("/api/todos", validator.body(createTodoValidationSchema), (req, res) => { //create new Todo
 	//localhost:3000/api/todos
 	const b = req.body;
 
@@ -46,11 +46,13 @@ app.post("/api/todos", validator.body(TodoValidationSchema), (req, res) => { //c
 	res.status(statusCodes["CREATED"]).json(newTodo);
 });
 
-app.put("/api/todos/:id", validator.body(TodoValidationSchema), (req, res) => { //modify Todo
+app.put("/api/todos/:id", validator.body(modifyTodoValidationSchema), (req, res) => { //modify Todo
 	const b = req.body;
-	const foundTodo = currentTodos().find(oneTodo => oneTodo.id == b.id);
+	const id = req.params.id;
+
+	const foundTodo = currentTodos.find(oneTodo => oneTodo.id == id);
 	if (!foundTodo) {
-		res.status(statusCodes["NOT_FOUND"]).json("Todo with id " + b.id + " does not exist.");
+		res.status(statusCodes["NOT_FOUND"]).json("Todo with id " + id + " does not exist.");
 		return;
 	}
 

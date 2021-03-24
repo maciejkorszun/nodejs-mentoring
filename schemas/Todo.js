@@ -1,8 +1,13 @@
 const Joi = require("@hapi/joi");
 
-const TodoValidationSchema = Joi.object({
+const createTodoValidationSchema = Joi.object({
 	id: Joi.alternatives().try(Joi.number().integer(), Joi.string()),
 	description: Joi.string().required(),
+	completed: Joi.boolean(),
+});
+
+const modifyTodoValidationSchema = Joi.object({
+	description: Joi.string(),
 	completed: Joi.boolean(),
 });
 
@@ -22,5 +27,6 @@ function Todo(id = null, description = null, completed = false) {
 
 module.exports = {
 	Todo: Todo, 
-	TodoValidationSchema: TodoValidationSchema
+	createTodoValidationSchema: createTodoValidationSchema,
+	modifyTodoValidationSchema: modifyTodoValidationSchema
 };
