@@ -50,14 +50,14 @@ app.put("/api/todos/:id", validator.body(modifyTodoValidationSchema), (req, res)
 	const b = req.body;
 	const id = req.params.id;
 
-	const foundTodo = currentTodos.find(oneTodo => oneTodo.id == id);
+	let foundTodo = currentTodos.find(oneTodo => oneTodo.id == id);
 	if (!foundTodo) {
 		res.status(statusCodes["NOT_FOUND"]).json("Todo with id " + id + " does not exist.");
 		return;
 	}
 
-	b.description ? foundTodo.description = b.description : null;
-	b.completed !== null && b.completed !== undefined ? foundTodo.completed = b.completed : null;
+	// foundTodo = {...foundTodo, ...b}; //this doesnt work bc it creates new obj, instead of modifying state
+	Object.assign(foundTodo, b);
 
 	res.status(statusCodes["OK"]).json(foundTodo);
 });
