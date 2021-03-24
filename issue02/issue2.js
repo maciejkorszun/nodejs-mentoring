@@ -57,7 +57,7 @@ app.put("/api/todos/:id", validator.body(modifyTodoValidationSchema), (req, res)
 	}
 
 	b.description ? foundTodo.description = b.description : null;
-	b.completed ? foundTodo.completed = b.completed : null;
+	b.completed !== null && b.completed !== undefined ? foundTodo.completed = b.completed : null;
 
 	res.status(statusCodes["OK"]).json(foundTodo);
 });
