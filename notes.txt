@@ -5,3 +5,7 @@ You have to be logged in on github to push to the repo (maciejkorszun account)
 
 read this  before next wednesday:
 https://blog.logrocket.com/the-perfect-architecture-flow-for-your-next-node-js-project/#rule1correctlyorganizingourfilesintofolders
+
+// const b = req.body;
+// const p = req.params;
+// const q = req.query; //query?

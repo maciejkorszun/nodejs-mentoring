@@ -36,7 +36,7 @@ app.get("/api/todos/:id", function (req, res) { //localhost:3000/api/todos/1
 		res.status(statusCodes["NOT_FOUND"]).json("Todo with id " + req.params.id + " not found");
 });
 
-app.post("/api/todos", validator.body(TodoValidationSchema), (req, res) => { //create new user
+app.post("/api/todos", validator.body(TodoValidationSchema), (req, res) => { //create new Todo
 	//localhost:3000/api/todos
 	const b = req.body;
 
@@ -44,6 +44,20 @@ app.post("/api/todos", validator.body(TodoValidationSchema), (req, res) => { //c
 	currentTodos.push(newTodo);
 
 	res.status(statusCodes["CREATED"]).json(newTodo);
+});
+
+app.put("/api/todos/:id", validator.body(TodoValidationSchema), (req, res) => { //modify Todo
+	const b = req.body;
+	const foundTodo = currentTodos().find(oneTodo => oneTodo.id == b.id);
+	if (!foundTodo) {
+		res.status(statusCodes["NOT_FOUND"]).json("Todo with id " + b.id + " does not exist.");
+		return;
+	}
+
+	b.description ? foundTodo.description = b.description : null;
+	b.completed ? foundTodo.completed = b.completed : null;
+
+	res.status(statusCodes["OK"]).json(foundTodo);
 });
 
 app.listen(PORT);
