@@ -1,8 +1,9 @@
 const express = require("express");
-const {Todo, TodoValidationSchema} = require("../schemas/Todo");
+const { Todo, TodoValidationSchema } = require("../schemas/Todo");
 const statusCodes = require("../other/statusCodes");
 const expressJoiValidation = require("express-joi-validation");
 const validator = expressJoiValidation.createValidator({});
+const { getNewId } = require("../other/helperFunctions");
 
 const app = express();
 const PORT = 3000;
@@ -12,13 +13,6 @@ app.use(express.urlencoded({ extended: false })); // parse application/json
 app.use(express.json());
 
 console.log("app listening on port " + PORT);
-
-function countId() {
-	let counter = 0;
-	return () => ++counter;
-}
-let getNewId = countId();
-
 
 let currentTodos = [
 	new Todo(getNewId(), "Buy groceries"),
