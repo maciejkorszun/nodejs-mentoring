@@ -1,8 +1,8 @@
-function countId() {
+function getNewIdFunction() {
 	let counter = 0;
 	return () => ++counter;
 }
-const getNewId = countId();
+const getNewId = getNewIdFunction();
 
 
-module.exports = {getNewId};
+module.exports = { getNewId };
