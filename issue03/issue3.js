@@ -1,5 +1,6 @@
 const express = require("express");
 const { Todo, createTodoValidationSchema, modifyTodoValidationSchema } = require("../schemas/Todo");
+const { User } = require("../schemas/Todo");
 const statusCodes = require("../other/statusCodes");
 const expressJoiValidation = require("express-joi-validation");
 const validator = expressJoiValidation.createValidator({});
@@ -20,9 +21,25 @@ let currentTodos = [
 	new Todo(getNewId(), "Wash the floors", false)
 ];
 
+const systemUsers = [
+	new User("maciek", "123"),
+	new User("qwe", "rty"),
+	new User("zxc", "zxc")
+];
+
 
 app.get("/", function (req, res) {
 	res.send("Maciej Korszuń nodejs mentoring with Adilson Junior as guru");
+});
+
+app.post("/api/login", (req, res) => { //create new Todo
+	const b = req.body;
+
+	Object.entries(systemUsers).map((name, pass) => {
+		console.log(name);
+	});
+
+	res.status(statusCodes["CREATED"]).json(newTodo);
 });
 
 app.get("/api/todos", function (req, res) {
