@@ -1,6 +1,6 @@
 const express = require("express");
 const { Todo, createTodoValidationSchema, modifyTodoValidationSchema } = require("../schemas/Todo");
-const { User } = require("../schemas/Todo");
+const { User } = require("../schemas/User");
 const statusCodes = require("../other/statusCodes");
 const expressJoiValidation = require("express-joi-validation");
 const validator = expressJoiValidation.createValidator({});

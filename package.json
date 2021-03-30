@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "1": "nodemon issue01/issue1",
     "2": "nodemon issue02/issue2",
-    "3": "nodemon issue02/issue3"
+    "3": "nodemon issue03/issue3"
   },
   "repository": {
     "type": "git",
