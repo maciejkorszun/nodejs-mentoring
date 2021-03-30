@@ -26,20 +26,29 @@ const systemUsers = [
 	new User("qwe", "rty"),
 	new User("zxc", "zxc")
 ];
+console.log(systemUsers)
 
 
 app.get("/", function (req, res) {
 	res.send("Maciej Korszuń nodejs mentoring with Adilson Junior as guru");
 });
 
-app.post("/api/login", (req, res) => { //create new Todo
+app.post("/api/login", (req, res) => { //login
 	const b = req.body;
 
-	Object.entries(systemUsers).map((name, pass) => {
-		console.log(name);
+	systemUsers.map((oneUser) => {
+		if (oneUser.username === b.username) {
+			if (oneUser.password === b.password) {
+				res.status(statusCodes["OK"]).json(oneUser);
+				return;
+			} else {
+				res.status(statusCodes["FORBIDDEN"]).json("Wrong password for user '" + b.username + "'.");
+				return;
+			}
+		}
 	});
 
-	res.status(statusCodes["CREATED"]).json(newTodo);
+	res.status(statusCodes["NOT_FOUND"]).json("User with name '" + b.username + "' not found.");
 });
 
 app.get("/api/todos", function (req, res) {
