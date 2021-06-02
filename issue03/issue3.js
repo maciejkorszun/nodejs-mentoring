@@ -26,7 +26,6 @@ const systemUsers = [
 	new User("qwe", "rty"),
 	new User("zxc", "zxc")
 ];
-console.log(systemUsers)
 
 
 app.get("/", function (req, res) {
@@ -39,7 +38,8 @@ app.post("/api/login", (req, res) => { //login
 	systemUsers.map((oneUser) => {
 		if (oneUser.username === b.username) {
 			if (oneUser.password === b.password) {
-				res.status(statusCodes["OK"]).json(oneUser);
+				let token = "token"; //TODO
+				res.status(statusCodes["OK"]).json(token);
 				return;
 			} else {
 				res.status(statusCodes["FORBIDDEN"]).json("Wrong password for user '" + b.username + "'.");
