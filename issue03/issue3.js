@@ -41,11 +41,11 @@ app.post("/api/login", (req, res) => { //login
 				let token = "token"; //TODO
 				res.status(statusCodes["OK"]).json(token);
 				return;
-			} else {
-				res.status(statusCodes["FORBIDDEN"]).json("Wrong password for user '" + b.username + "'.");
-				return;
 			}
 		}
+		//never diffrentiate wrong username/password errors  - you will give info if the given username exists that way
+		res.status(statusCodes["FORBIDDEN"]).json("Could not authenticate - either there's no username or password is incorrect");
+		return;
 	});
 
 	res.status(statusCodes["NOT_FOUND"]).json("User with name '" + b.username + "' not found.");
