@@ -5,6 +5,8 @@ const statusCodes = require("../other/statusCodes");
 const expressJoiValidation = require("express-joi-validation");
 const validator = expressJoiValidation.createValidator({});
 const { getNewId } = require("../other/helperFunctions");
+require('dotenv').config();
+var jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = 3000;
@@ -35,20 +37,21 @@ app.get("/", function (req, res) {
 app.post("/api/login", (req, res) => { //login
 	const b = req.body;
 
-	systemUsers.map((oneUser) => {
-		if (oneUser.username === b.username) {
-			if (oneUser.password === b.password) {
-				let token = "token"; //TODO
-				res.status(statusCodes["OK"]).json(token);
-				return;
-			}
-		}
-		//never diffrentiate wrong username/password errors  - you will give info if the given username exists that way
-		res.status(statusCodes["FORBIDDEN"]).json("Could not authenticate - either there's no username or password is incorrect");
+	const user = systemUsers.find((oneUser) => oneUser.username === b.username);
+	if (user && user.password === b.password) { //header is created automatically
+		let token = jwt.sign(
+		{
+			username: b.username 	 //payload	
+		},
+			process.env.JWT_SECRET  //secret
+		);
+		
+		res.status(statusCodes["OK"]).json(token);
 		return;
-	});
-
-	res.status(statusCodes["NOT_FOUND"]).json("User with name '" + b.username + "' not found.");
+	}
+	//never diffrentiate wrong username/password errors  - you will give info if the given username exists that way
+	res.status(statusCodes["FORBIDDEN"]).json("Could not authenticate - either there's no username or password is incorrect");
+	return;
 });
 
 app.get("/api/todos", function (req, res) {
