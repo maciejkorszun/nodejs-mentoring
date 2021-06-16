@@ -9,3 +9,15 @@ https://blog.logrocket.com/the-perfect-architecture-flow-for-your-next-node-js-p
 // const b = req.body;
 // const p = req.params;
 // const q = req.query; //query?
+
+
+onion architecture
+https://www.youtube.com/watch?v=5OtUm1BLmG0
+
+
+branch separation-of-concers-example shows what code quality we are aiming for - the separation of service, api and so
+
+ypu can keep the token stored in cookies or header
+we are going with cookies for now
+
+#TODO: reogranize project structure like a normal application, not /issueX

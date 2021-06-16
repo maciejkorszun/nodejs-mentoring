@@ -7,6 +7,7 @@
     "1": "nodemon issue01/issue1",
     "2": "nodemon issue02/issue2",
     "3": "nodemon issue03/issue3",
+    "start": "nodemon src/main",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +27,8 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-joi-validation": "^4.0.4-beta.0",
     "jsonwebtoken": "^8.5.1"
